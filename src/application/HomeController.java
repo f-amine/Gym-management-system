@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,16 +10,42 @@ import java.util.ResourceBundle;
 
 import appClasses.dbConnection;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
 	
 	private Connection connection;
 	private dbConnection handler;
+	
+	 @FXML
+	    private Pane assistantsBtn;
 
+	 @FXML
+	  	private Pane equipmentsBtn;
+	 
+	 @FXML
+	    private Pane memberBtn;
+	 
+	 @FXML
+	    private Pane membershipBtn;
+	 
+	 @FXML
+	    private Pane programBtn;
+
+	 @FXML
+	    private Pane reportsBtn;
+	 
+	 @FXML
+	    private Pane trainorBtn;
+	 
     @FXML
     private LineChart<?, ?> membersGraph;
 
@@ -94,6 +121,7 @@ public class HomeController implements Initializable {
 		}
 		return count;
     }
+    //returns the number of staff in the gym
     public int getNumerStaff() {
     	int count =0;
     	String q1 = "SELECT COUNT(*) FROM employee";
@@ -110,6 +138,7 @@ public class HomeController implements Initializable {
 		}
 		return count;
     }
+    //Return number of equipments in the gym
     public int getNumerEquipments() {
     	int count =0;
     	String q1 = "SELECT COUNT(*) FROM equipment";
@@ -126,7 +155,36 @@ public class HomeController implements Initializable {
 		}
 		return count;
     }
-    
+  //Change scene to members Page
+    public void getMembersScene() {
+		memberBtn.getScene().getWindow().hide();
+		Stage member = new Stage();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			Scene scene = new Scene(root);
+			member.setScene(scene);
+			member.show();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    //Change scene to program Page
+    public void getProgramScene() {
+		memberBtn.getScene().getWindow().hide();
+		Stage program = new Stage();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			Scene scene = new Scene(root);
+			program.setScene(scene);
+			program.show();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
     
     
     @Override
@@ -139,4 +197,6 @@ public class HomeController implements Initializable {
 		numberStaff.setText(String.valueOf(getNumerStaff()));
 		numberEquipments.setText(String.valueOf(getNumerEquipments()));
 	}
+    
 }
+

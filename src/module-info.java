@@ -4,6 +4,8 @@ module boba {
 	requires mysql.connector.java;
 	requires java.sql;
 	requires javafx.graphics;
+	requires com.jfoenix;
+	requires javafx.base;
 	
 	opens application to javafx.graphics, javafx.fxml;
 }

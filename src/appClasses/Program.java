@@ -5,8 +5,7 @@ public class Program {
 	  private String name;
 	  private String description;
 
-	  public Program(int id, String name, String description, Member member, Instructor instructor) {
-	    this.id = id;
+	  public Program(String name, String description) {
 	    this.name = name;
 	    this.description = description;
 	  }
