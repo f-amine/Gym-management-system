@@ -1,52 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProgramController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Assets/Program.png" />
          </image>
       </ImageView>
-      <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="211.0">
+      <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="memberBtn" layoutX="17.0" layoutY="205.0" onMouseClicked="#getMembersScene" prefHeight="45.0" prefWidth="211.0">
+      <Pane fx:id="memberBtn" layoutX="17.0" layoutY="205.0" onMouseClicked="#getMembersScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="assistantsBtn" layoutX="17.0" layoutY="281.0" prefHeight="45.0" prefWidth="211.0">
+      <Pane fx:id="assistantsBtn" layoutX="17.0" layoutY="281.0" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="trainorBtn" layoutX="17.0" layoutY="354.0" prefHeight="51.0" prefWidth="165.0">
+      <Pane fx:id="trainorBtn" layoutX="17.0" layoutY="354.0" prefHeight="51.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="membershipBtn" layoutX="17.0" layoutY="438.0" prefHeight="45.0" prefWidth="211.0">
+      <Pane fx:id="membershipBtn" layoutX="17.0" layoutY="438.0" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="equipmentsBtn" layoutX="17.0" layoutY="518.0" prefHeight="45.0" prefWidth="190.0">
+      <Pane fx:id="equipmentsBtn" layoutX="17.0" layoutY="518.0" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="programBtn" layoutX="21.0" layoutY="591.0" onMouseClicked="#getProgramScene" prefHeight="45.0" prefWidth="154.0">
+      <Pane fx:id="programBtn" layoutX="21.0" layoutY="591.0" onMouseClicked="#getProgramScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="reportsBtn" layoutX="14.0" layoutY="671.0" prefHeight="45.0" prefWidth="165.0">
+      <Pane fx:id="reportsBtn" layoutX="14.0" layoutY="671.0" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <JFXTreeTableView fx:id="treeTableView" layoutX="206.0" layoutY="167.0" prefHeight="477.0" prefWidth="955.0" />
+      <TableView fx:id="test" layoutX="141.0" layoutY="127.0" prefHeight="586.0" prefWidth="299.0">
+        <columns>
+          <TableColumn fx:id="col_name" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="col_description" prefWidth="223.0" text="Description" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

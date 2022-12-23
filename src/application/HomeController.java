@@ -176,7 +176,7 @@ public class HomeController implements Initializable {
 		Stage program = new Stage();
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			root = FXMLLoader.load(getClass().getResource("Program.fxml"));
 			Scene scene = new Scene(root);
 			program.setScene(scene);
 			program.show();
