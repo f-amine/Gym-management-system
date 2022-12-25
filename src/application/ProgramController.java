@@ -14,6 +14,8 @@ import appClasses.Program;
 import appClasses.dbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -38,27 +40,6 @@ public class ProgramController implements Initializable{
     private TableColumn<Program, String> col_name;   
     
     @FXML
-    private Pane assistantsBtn;
-
-    @FXML
-    private Pane equipmentsBtn;
-
-    @FXML
-    private Pane memberBtn;   
-
-    @FXML
-    private Pane membershipBtn;
-
-    @FXML
-    private Pane programBtn;
-
-    @FXML
-    private Pane reportsBtn;
-
-    @FXML
-    private Pane trainorBtn;
-    
-    @FXML
     private TextField description;
     
     @FXML
@@ -68,7 +49,11 @@ public class ProgramController implements Initializable{
     private TextField programName;
     
     @FXML
+    private TextField filterField;
+
+    @FXML
     private TextField memberId;
+    
     private Connection connection;
 	private dbConnection handler;
 	private PreparedStatement pst;
@@ -85,6 +70,7 @@ public class ProgramController implements Initializable{
     void getProgramScene(MouseEvent event) {
 
     }
+    ObservableList<Program> dataList;
     public ObservableList<Program> loadData() {
     	connection = handler.getConnection();
     	String q1 = "SELECT programName,description from program";
@@ -120,14 +106,16 @@ public class ProgramController implements Initializable{
 			pst.setString(1, formName.getText());
 			pst.setString(2, description.getText());
 			pst.execute();
-			
+			test.setItems(loadData());
+			search_program();
 			JOptionPane.showMessageDialog(null, "Program added succesfully");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 			e.printStackTrace();
 		}
-		  test.setItems(loadData());
    }
+    
+    
     @FXML
     void getSelected(MouseEvent event) {
     	index = test.getSelectionModel().getSelectedIndex();
@@ -154,6 +142,7 @@ public class ProgramController implements Initializable{
 		}
 		test.setItems(loadData());
     }
+    
     public void deleteProgram(){
     	program = test.getSelectionModel().getSelectedItem();
     	connection = handler.getConnection();
@@ -163,12 +152,15 @@ public class ProgramController implements Initializable{
 			pst.setString(1, formName.getText());
 			pst.execute();
 			JOptionPane.showMessageDialog(null, "program deleted succesfully");
+			test.setItems(loadData());
+			search_program();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 			e.printStackTrace();
 		}
-		test.setItems(loadData());
     }
+    
+    
     public boolean checkMemberExist(){
     	connection = handler.getConnection();
     	String q1 = "SELECT memberid from member where memberid=?";
@@ -231,13 +223,46 @@ public class ProgramController implements Initializable{
 			e.printStackTrace();
 		}
     }
+    
+    
+    @FXML
+    void search_program() {          
+    	col_name.setCellValueFactory(new PropertyValueFactory<Program, String>("Name"));
+		col_description.setCellValueFactory(new PropertyValueFactory<Program, String>("description"));        
+        dataList = loadData();
+        test.setItems(dataList);
+        FilteredList<Program> filteredData = new FilteredList<>(dataList, b -> true);  
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+        	filteredData.setPredicate(person -> {
+        		if (newValue == null || newValue.isEmpty()) {
+        			return true;
+        		}    
+    String lowerCaseFilter = newValue.toLowerCase();
+    
+    	if (person.getName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
+    		{
+    			return true; // Filter matches Name
+    		} 
+    	else if (person.getDescription().toLowerCase().indexOf(lowerCaseFilter) != -1) 
+    	{
+    			return true; // Filter matches Description
+    	}                           
+         else  
+          return false; // Does not match.
+        });
+        });  
+        SortedList<Program> sortedData = new SortedList<>(filteredData);  
+        sortedData.comparatorProperty().bind(test.comparatorProperty());  
+        test.setItems(sortedData);      
+    }
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new dbConnection();
 		col_name.setCellValueFactory(new PropertyValueFactory<Program, String>("Name"));
 		col_description.setCellValueFactory(new PropertyValueFactory<Program, String>("description"));
 		test.setItems(loadData());
-       
+		search_program();
 	}
 
 }

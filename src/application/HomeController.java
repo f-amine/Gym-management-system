@@ -87,14 +87,18 @@ public class HomeController implements Initializable {
     //count the number of members whose membership expires in each month of the current year
     public void getMemberGraphData() {
     	 
-    	String q1 = "SELECT COUNT(*) as 'Number of New Members', MONTH(membershipExpiration) as 'Month' FROM Member WHERE YEAR(membershipExpiration) = YEAR(CURDATE()) GROUP BY MONTH(membershipExpiration)";
+    	String q1 = "SELECT COUNT(*) AS 'Number of Members', "
+    			+ "MONTHNAME(membershipExpiration) AS 'Month' FROM Member "
+    			+ "WHERE MONTH(membershipExpiration) "
+    			+ "BETWEEN MONTH(DATE_ADD(CURRENT_DATE, INTERVAL -1 MONTH)) AND MONTH(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH))"
+    			+ " GROUP BY MONTH(membershipExpiration)";
 		try {
 			Statement st=connection.createStatement();
 			ResultSet rs = st.executeQuery(q1);
 			XYChart.Series series = new XYChart.Series();
 			while (rs.next()) {
 				   String x = rs.getString("Month");
-				   double y = rs.getDouble("Number of New Members");
+				   double y = rs.getDouble("Number of Members");
 				   series.getData().add(new XYChart.Data(x, y));
 				 }
 			membersGraph.getData().addAll(series);
