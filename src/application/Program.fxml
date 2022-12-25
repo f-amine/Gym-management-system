@@ -76,5 +76,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
+      <TextField fx:id="programName" layoutX="963.0" layoutY="200.0" prefHeight="38.0" prefWidth="302.0" promptText="Program name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="memberId" layoutX="963.0" layoutY="291.0" prefHeight="38.0" prefWidth="302.0" promptText="Member's ID">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Pane layoutX="1020.0" layoutY="405.0" onMouseClicked="#assignProgram" prefHeight="44.0" prefWidth="230.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
    </children>
 </AnchorPane>

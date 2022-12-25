@@ -64,10 +64,17 @@ public class ProgramController implements Initializable{
     @FXML
     private TextField formName;
     
+    @FXML
+    private TextField programName;
+    
+    @FXML
+    private TextField memberId;
     private Connection connection;
 	private dbConnection handler;
 	private PreparedStatement pst;
+	
 	Program program =null;
+	
 	int index =-1;
     @FXML
     void getMembersScene(MouseEvent event) {
@@ -161,6 +168,68 @@ public class ProgramController implements Initializable{
 			e.printStackTrace();
 		}
 		test.setItems(loadData());
+    }
+    public boolean checkMemberExist(){
+    	connection = handler.getConnection();
+    	String q1 = "SELECT memberid from member where memberid=?";
+    	try {
+			pst=connection.prepareStatement(q1);
+			pst.setString(1, memberId.getText());
+			ResultSet rs = pst.executeQuery();
+			int count=0;
+			while (rs.next()) {
+				count=count+1;
+			}
+			if (count==1) {
+				return true;
+			}
+			else return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+    	
+    }
+    public boolean checkProgramExist() {
+    	connection = handler.getConnection();
+    	String q1 = "SELECT programName from program where programName=?";
+    	try {
+			pst=connection.prepareStatement(q1);
+			pst.setString(1, programName.getText());
+			ResultSet rs = pst.executeQuery();
+			int count=0;
+			while (rs.next()) {
+				count=count+1;
+			}
+			if (count==1) {
+				return true;
+			}
+			else return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+    }
+    
+    public void assignProgram() {
+    	connection = handler.getConnection();
+    	String q1 = "UPDATE member SET program= ? where memberid = ?";
+    	try {
+			if (checkMemberExist() && checkProgramExist()) {
+				pst=connection.prepareStatement(q1);
+				pst.setString(1, programName.getText());
+				pst.setString(2, memberId.getText());
+				pst.execute();
+				JOptionPane.showMessageDialog(null, "program Assigned succesfully");
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Member or program doesn't exist please enter a valid Member's ID and Program Name");
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
