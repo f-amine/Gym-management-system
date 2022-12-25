@@ -3,10 +3,12 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProgramController">
    <children>
@@ -48,11 +50,31 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <TableView fx:id="test" layoutX="141.0" layoutY="127.0" prefHeight="586.0" prefWidth="299.0">
+      <TableView fx:id="test" layoutX="519.0" layoutY="145.0" onMouseClicked="#getSelected" prefHeight="502.0" prefWidth="383.0">
         <columns>
-          <TableColumn fx:id="col_name" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="col_description" prefWidth="223.0" text="Description" />
+          <TableColumn fx:id="col_name" prefWidth="98.0" text="Name" />
+          <TableColumn fx:id="col_description" prefWidth="284.0" text="Description" />
         </columns>
       </TableView>
+      <TextField fx:id="formName" layoutX="107.0" layoutY="194.0" prefHeight="45.0" prefWidth="302.0" promptText="Program name">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="description" alignment="TOP_LEFT" layoutX="107.0" layoutY="291.0" onKeyPressed="#newLine" prefHeight="156.0" prefWidth="302.0" promptText="Program description" />
+      <Pane layoutX="181.0" layoutY="490.0" onMouseClicked="#addProgram" prefHeight="45.0" prefWidth="223.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="186.0" layoutY="553.0" onMouseClicked="#editPorgram" prefHeight="38.0" prefWidth="223.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane layoutX="186.0" layoutY="614.0" onMouseClicked="#deleteProgram" prefHeight="38.0" prefWidth="223.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
    </children>
 </AnchorPane>

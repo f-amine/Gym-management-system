@@ -5,6 +5,7 @@ module boba {
 	requires javafx.graphics;
 	requires com.jfoenix;
 	requires javafx.base;
+	requires java.desktop;
 	
 	opens appClasses to javafx.base;
 
