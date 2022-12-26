@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.equipmentsController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1366.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/Equipments.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="205.0" onMouseClicked="#getMembersScene" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="281.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="354.0" prefHeight="51.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="438.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="518.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="14.0" layoutY="598.0" onMouseClicked="#getProgramScene" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="14.0" layoutY="671.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <TableView fx:id="test" layoutX="751.0" layoutY="187.0" onMouseClicked="#getSelectedData" prefHeight="498.0" prefWidth="581.0">
+        <columns>
+          <TableColumn fx:id="col_Id" prefWidth="92.0" text="Id" />
+          <TableColumn fx:id="col_Name" prefWidth="189.0" text="Name" />
+            <TableColumn fx:id="col_Quantity" prefWidth="145.0" text="Quantity" />
+            <TableColumn fx:id="col_Price" prefWidth="154.0" text="Price" />
+        </columns>
+      </TableView>
+      <Pane layoutX="112.0" layoutY="518.0" onMouseClicked="#addEquipment" prefHeight="45.0" prefWidth="223.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="108.0" layoutY="589.0" onMouseClicked="#editEquipment" prefHeight="38.0" prefWidth="230.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane layoutX="108.0" layoutY="643.0" onMouseClicked="#deleteEquipment" prefHeight="38.0" prefWidth="223.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <TextField fx:id="filterField" layoutX="940.0" layoutY="145.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="898.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/Icons/search.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="IdE" layoutX="260.0" layoutY="154.0" prefHeight="31.0" prefWidth="314.0" promptText="Id" AnchorPane.rightAnchor="792.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="NameE" layoutX="292.0" layoutY="243.0" prefHeight="46.0" prefWidth="314.0" promptText="Name">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="QuantityE" layoutX="324.0" layoutY="331.0" prefHeight="46.0" prefWidth="314.0" promptText="Quantity">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="PriceE" layoutX="292.0" layoutY="428.0" prefHeight="46.0" prefWidth="314.0" promptText="Price">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

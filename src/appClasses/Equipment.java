@@ -1,19 +1,19 @@
 package appClasses;
 
 public class Equipment {
-		  private String equipementId;
+		  private int equipementId;
 		  private String name;
 		  private int quantity;
 		  private double pricePerUnit;
 
-		  public Equipment(String equipementId, String name, int quantity, double pricePerUnit) {
+		  public Equipment(int equipementId, String name, int quantity, double pricePerUnit) {
 		    this.equipementId = equipementId;
 		    this.name = name;
 		    this.quantity = quantity;
 		    this.pricePerUnit = pricePerUnit;
 		  }
 
-		  public String getEquipementId() {
+		  public int getEquipementId() {
 		    return equipementId;
 		  }
 
