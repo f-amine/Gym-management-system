@@ -6,10 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
-import appClasses.Instructor;
 import appClasses.Program;
 import appClasses.dbConnection;
 import javafx.collections.FXCollections;
@@ -25,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+
 
 public class ProgramController implements Initializable{
 

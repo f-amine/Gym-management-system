@@ -1,8 +1,9 @@
 package appClasses;
 
 public class Receptionist extends Employee {
-	  public Receptionist(int id, String firstName, String lastName, String email, String phoneNumber, String address, String role, String paymentInformation) {
-	    super(id, firstName, lastName, email, phoneNumber, address, role, paymentInformation);
+	  public Receptionist(int id, String firstName, String lastName, String email, String phoneNumber, String address, String paymentInformation) {
+	    super(id, firstName, lastName, email, phoneNumber, address, paymentInformation);
+	    this.role ="receptionist";
 	  }
 
 	  public void addMember(Member member) {

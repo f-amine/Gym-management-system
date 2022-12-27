@@ -6,10 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
-
-import appClasses.Equipment;
 import appClasses.MembershipOffer;
 import appClasses.dbConnection;
 import javafx.collections.FXCollections;

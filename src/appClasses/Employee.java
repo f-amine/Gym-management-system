@@ -1,27 +1,27 @@
 package appClasses;
 
 public class Employee {
-	  private int id;
-	  private String firstName;
-	  private String lastName;
-	  private String email;
-	  private String phoneNumber;
-	  private String address;
-	  private String role;
-	  private String paymentInformation;
+	  protected int id;
+	  protected String firstName;
+	  protected String lastName;
+	  protected String email;
+	  protected String phoneNumber;
+	  protected String address;
+	  protected String role;
+	  protected String paymentInformation;
 
-	  public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String address, String role, String paymentInformation) {
-	    this.id = id;
-	    this.firstName = firstName;
-	    this.lastName = lastName;
-	    this.email = email;
-	    this.phoneNumber = phoneNumber;
-	    this.address = address;
-	    this.role = role;
-	    this.paymentInformation = paymentInformation;
-	  }
+	  public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String address,String paymentInformation) {
+		  
+		    this.id = id;
+		    this.firstName = firstName;
+		    this.lastName = lastName;
+		    this.email = email;
+		    this.phoneNumber = phoneNumber;
+		    this.address = address;
+		    this.paymentInformation = paymentInformation;
+	}
 
-	  public int getId() {
+	public int getId() {
 	    return id;
 	  }
 
