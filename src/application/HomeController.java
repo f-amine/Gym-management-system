@@ -205,6 +205,21 @@ public class HomeController implements Initializable {
 		}
 	}
     
+    public void getMembershipOfferScene() {
+		memberBtn.getScene().getWindow().hide();
+		Stage program = new Stage();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("Membership.fxml"));
+			Scene scene = new Scene(root);
+			program.setScene(scene);
+			program.show();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new dbConnection();

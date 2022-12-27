@@ -42,7 +42,7 @@ public class MembershipController implements Initializable {
     private TableColumn<MembershipOffer, String> col_Price;
 
     @FXML
-    private TableColumn<MembershipOffer, String> col_Quantity;
+    private TableColumn<MembershipOffer, String> col_Duration;
 
     
     
@@ -53,7 +53,7 @@ public class MembershipController implements Initializable {
     private TextField NameE;
     
     @FXML
-    private TextField QuantityE;
+    private TextField DurationE;
 
     @FXML
     private TextField PriceE;
@@ -110,7 +110,7 @@ public class MembershipController implements Initializable {
 			pst=connection.prepareStatement(q1);
 			pst.setString(1, IdE.getText());
 			pst.setString(2, NameE.getText());
-			pst.setString(3, QuantityE.getText());
+			pst.setString(3, DurationE.getText());
 			pst.setString(4, PriceE.getText());
 			pst.execute();
 			test.setItems(loadData());
@@ -127,7 +127,7 @@ public class MembershipController implements Initializable {
     	MembershipOffer = test.getSelectionModel().getSelectedItem();
     	IdE.setText(Integer.valueOf(MembershipOffer.getId()).toString());
     	NameE.setText(col_Name.getCellData(MembershipOffer).toString());
-    	QuantityE.setText(Integer.valueOf(MembershipOffer.getDuration()).toString());
+    	DurationE.setText(Integer.valueOf(MembershipOffer.getDuration()).toString());
     	PriceE.setText(Double.valueOf(MembershipOffer.getPrice()).toString());
     }
     public void editEquipment() {
@@ -135,9 +135,9 @@ public class MembershipController implements Initializable {
     	connection = handler.getConnection();
     	String Value1= IdE.getText();
     	String Value2 = NameE.getText();    
-    	String Value3 = QuantityE.getText(); 
+    	String Value3 = DurationE.getText(); 
     	String Value4 = PriceE.getText(); 
-		String q1 = "UPDATE `Equipment` SET `membershipOfferId`= '"+Value1+"',`name`= '"+Value2+"' ,`duration`= '"+Value3+"' , `price`='"+Value4+"' WHERE membershipOfferId = '"+MembershipOffer.getId()+"'";
+		String q1 = "UPDATE `membershipoffer` SET `membershipOfferId`= '"+Value1+"',`name`= '"+Value2+"' ,`duration`= '"+Value3+"' , `price`='"+Value4+"' WHERE membershipOfferId = '"+MembershipOffer.getId()+"'";
 		try {
 			pst=connection.prepareStatement(q1);
 			pst.execute();
@@ -152,7 +152,7 @@ public class MembershipController implements Initializable {
     public void deleteEquipment(){
     	MembershipOffer = test.getSelectionModel().getSelectedItem();
     	connection = handler.getConnection();
-    	String q1 = "DELETE FROM Equipment WHERE membershipOfferId = ?";
+    	String q1 = "DELETE FROM membershipoffer WHERE membershipOfferId = ?";
 		try {
 			pst=connection.prepareStatement(q1);
 			pst.setString(1, IdE.getText());
@@ -172,8 +172,8 @@ public class MembershipController implements Initializable {
     void search_Equipment() {          
 		col_Id.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("id"));
 		col_Name.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("name"));
-		col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
-		col_Quantity.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));   
+		col_Duration.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
+		col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));
         dataList = loadData();
         test.setItems(dataList);
         FilteredList<MembershipOffer> filteredData = new FilteredList<>(dataList, b -> true);  
@@ -214,8 +214,8 @@ public class MembershipController implements Initializable {
 		handler = new dbConnection();
 		col_Id.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("id"));
 		col_Name.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("name"));
-		col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
-		col_Quantity.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));
+		col_Duration.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
+		col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));
 		test.setItems(loadData());
 		search_Equipment();
 	}

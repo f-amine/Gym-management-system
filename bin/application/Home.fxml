@@ -34,7 +34,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane fx:id="membershipBtn" layoutX="17.0" layoutY="438.0" prefHeight="45.0" prefWidth="211.0">
+      <Pane fx:id="membershipBtn" layoutX="17.0" layoutY="438.0" onMouseClicked="#getMembershipOfferScene" prefHeight="45.0" prefWidth="211.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
