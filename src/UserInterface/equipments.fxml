@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TrainorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.equipmentsController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Assets/Trainor.png" />
+            <Image url="@../Assets/Equipments.png" />
          </image>
       </ImageView>
       <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
@@ -50,72 +50,54 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <TableView fx:id="test" layoutX="725.0" layoutY="156.0" onMouseClicked="#getSelectedData" prefHeight="574.0" prefWidth="630.0">
+      <TableView fx:id="test" layoutX="751.0" layoutY="187.0" onMouseClicked="#getSelectedData" prefHeight="498.0" prefWidth="581.0">
         <columns>
-          <TableColumn fx:id="col_Id" prefWidth="61.0" text="Trainor Id" />
-          <TableColumn fx:id="col_FirstName" prefWidth="86.0" text="First Name" />
-            <TableColumn fx:id="col_LastName" prefWidth="87.0" text="Last Name" />
-            <TableColumn fx:id="col_Email" prefWidth="117.0" text="Email" />
-            <TableColumn fx:id="col_Phone" prefWidth="95.0" text="Phone Number" />
-            <TableColumn fx:id="col_Address" prefWidth="88.0" text="Address" />
-            <TableColumn fx:id="col_Payment" prefWidth="95.0" text="Payment Information" />
+          <TableColumn fx:id="col_Id" prefWidth="92.0" text="Id" />
+          <TableColumn fx:id="col_Name" prefWidth="189.0" text="Name" />
+            <TableColumn fx:id="col_Quantity" prefWidth="145.0" text="Quantity" />
+            <TableColumn fx:id="col_Price" prefWidth="154.0" text="Price" />
         </columns>
       </TableView>
-      <Pane layoutX="261.0" layoutY="627.0" onMouseClicked="#addTrainor" prefHeight="45.0" prefWidth="255.0">
+      <Pane layoutX="112.0" layoutY="518.0" onMouseClicked="#addEquipment" prefHeight="45.0" prefWidth="223.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="108.0" layoutY="685.0" onMouseClicked="#editTrainor" prefHeight="45.0" prefWidth="262.0">
+      <Pane layoutX="108.0" layoutY="589.0" onMouseClicked="#editEquipment" prefHeight="38.0" prefWidth="230.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="415.0" layoutY="682.0" onMouseClicked="#deleteTrainor" prefHeight="45.0" prefWidth="255.0">
+      <Pane layoutX="108.0" layoutY="643.0" onMouseClicked="#deleteEquipment" prefHeight="38.0" prefWidth="223.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <TextField fx:id="filterField" layoutX="940.0" layoutY="106.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
+      <TextField fx:id="filterField" layoutX="940.0" layoutY="145.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
          <font>
             <Font size="13.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="898.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="898.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Assets/Icons/search.png" />
          </image>
       </ImageView>
-      <TextField fx:id="IdE" layoutX="242.0" layoutY="154.0" prefHeight="31.0" prefWidth="314.0" promptText="Id" AnchorPane.rightAnchor="810.0">
+      <TextField fx:id="IdE" layoutX="324.0" layoutY="150.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="728.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="FirstNameE" layoutX="242.0" layoutY="215.0" prefHeight="46.0" prefWidth="314.0" promptText="First Name">
+      <TextField fx:id="NameE" layoutX="324.0" layoutY="244.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="LastNameE" layoutX="242.0" layoutY="281.0" prefHeight="46.0" prefWidth="314.0" promptText="Last Name">
+      <TextField fx:id="QuantityE" layoutX="324.0" layoutY="331.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="EmailE" layoutX="242.0" layoutY="346.0" prefHeight="46.0" prefWidth="314.0" promptText="Email">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="PhoneE" layoutX="268.0" layoutY="405.0" prefHeight="46.0" prefWidth="314.0" promptText="Phone Number">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="AddressE" layoutX="242.0" layoutY="472.0" prefHeight="46.0" prefWidth="314.0" promptText="Address">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="PaymentE" layoutX="349.0" layoutY="540.0" prefHeight="46.0" prefWidth="314.0" promptText="Payment Information">
+      <TextField fx:id="PriceE" layoutX="324.0" layoutY="425.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>

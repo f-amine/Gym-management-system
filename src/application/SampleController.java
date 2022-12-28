@@ -31,7 +31,7 @@ public class SampleController implements Initializable {
 
     @FXML
     private TextField username;
-
+    public 
     @FXML
     void login(ActionEvent event) {
     	//retrieve date from database
@@ -50,7 +50,7 @@ public class SampleController implements Initializable {
 				signIn.getScene().getWindow().hide();
 				Stage home = new Stage();
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+					Parent root = FXMLLoader.load(getClass().getResource("/UserInterface/home.fxml"));
 					Scene scene = new Scene(root);
 					home.setScene(scene);
 					home.show();

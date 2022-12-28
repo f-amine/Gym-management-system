@@ -15,12 +15,12 @@
             <Image url="@../../../../4IIR/Gym%20Management/assets/Login.png" />
          </image>
       </ImageView>
-      <TextField fx:id="username" layoutX="119.0" layoutY="278.0" prefHeight="48.0" prefWidth="303.0">
+      <TextField fx:id="username" layoutX="119.0" layoutY="278.0" prefHeight="48.0" prefWidth="303.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="password" layoutX="116.0" layoutY="384.0" prefHeight="48.0" prefWidth="303.0" />
+      <PasswordField fx:id="password" layoutX="116.0" layoutY="384.0" prefHeight="48.0" prefWidth="303.0" style="-fx-background-color: transparent;" />
       <Button id="but" fx:id="signIn" layoutX="166.0" layoutY="465.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="165.0" stylesheets="@application.css" text="Sign in" />
    </children>
 </AnchorPane>

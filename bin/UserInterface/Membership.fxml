@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.equipmentsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MembershipController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Assets/Equipments.png" />
+            <Image url="@../Assets/Membership.png" />
          </image>
       </ImageView>
       <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
@@ -52,9 +52,9 @@
       </Pane>
       <TableView fx:id="test" layoutX="751.0" layoutY="187.0" onMouseClicked="#getSelectedData" prefHeight="498.0" prefWidth="581.0">
         <columns>
-          <TableColumn fx:id="col_Id" prefWidth="92.0" text="Id" />
-          <TableColumn fx:id="col_Name" prefWidth="189.0" text="Name" />
-            <TableColumn fx:id="col_Quantity" prefWidth="145.0" text="Quantity" />
+          <TableColumn fx:id="col_Id" prefWidth="137.0" text="MembershipOfferId" />
+          <TableColumn fx:id="col_Name" prefWidth="144.0" text="Name" />
+            <TableColumn fx:id="col_Duration" prefWidth="145.0" text="Duration" />
             <TableColumn fx:id="col_Price" prefWidth="154.0" text="Price" />
         </columns>
       </TableView>
@@ -82,22 +82,22 @@
             <Image url="@../Assets/Icons/search.png" />
          </image>
       </ImageView>
-      <TextField fx:id="IdE" layoutX="260.0" layoutY="154.0" prefHeight="31.0" prefWidth="314.0" promptText="Id" AnchorPane.rightAnchor="792.0">
+      <TextField fx:id="IdE" layoutX="351.0" layoutY="150.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="701.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="NameE" layoutX="292.0" layoutY="243.0" prefHeight="46.0" prefWidth="314.0" promptText="Name">
+      <TextField fx:id="NameE" layoutX="351.0" layoutY="244.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="QuantityE" layoutX="324.0" layoutY="331.0" prefHeight="46.0" prefWidth="314.0" promptText="Quantity">
+      <TextField fx:id="DurationE" layoutX="351.0" layoutY="331.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="PriceE" layoutX="292.0" layoutY="428.0" prefHeight="46.0" prefWidth="314.0" promptText="Price">
+      <TextField fx:id="PriceE" layoutX="351.0" layoutY="425.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>

@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.TrainorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReceptionistController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Assets/Trainor.png" />
+            <Image url="@../Assets/Receptionist.png" />
          </image>
       </ImageView>
       <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
@@ -52,25 +52,25 @@
       </Pane>
       <TableView fx:id="test" layoutX="725.0" layoutY="156.0" onMouseClicked="#getSelectedData" prefHeight="574.0" prefWidth="630.0">
         <columns>
-          <TableColumn fx:id="col_Id" prefWidth="61.0" text="Trainor Id" />
-          <TableColumn fx:id="col_FirstName" prefWidth="86.0" text="First Name" />
-            <TableColumn fx:id="col_LastName" prefWidth="87.0" text="Last Name" />
-            <TableColumn fx:id="col_Email" prefWidth="117.0" text="Email" />
+          <TableColumn fx:id="col_Id" prefWidth="93.0" text="Receptionist Id" />
+          <TableColumn fx:id="col_FirstName" prefWidth="79.0" text="First Name" />
+            <TableColumn fx:id="col_LastName" prefWidth="83.0" text="Last Name" />
+            <TableColumn fx:id="col_Email" prefWidth="96.0" text="Email" />
             <TableColumn fx:id="col_Phone" prefWidth="95.0" text="Phone Number" />
             <TableColumn fx:id="col_Address" prefWidth="88.0" text="Address" />
             <TableColumn fx:id="col_Payment" prefWidth="95.0" text="Payment Information" />
         </columns>
       </TableView>
-      <Pane layoutX="261.0" layoutY="627.0" onMouseClicked="#addTrainor" prefHeight="45.0" prefWidth="255.0">
+      <Pane layoutX="261.0" layoutY="627.0" onMouseClicked="#addReceptionist" prefHeight="45.0" prefWidth="255.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="108.0" layoutY="685.0" onMouseClicked="#editTrainor" prefHeight="45.0" prefWidth="262.0">
+      <Pane layoutX="108.0" layoutY="685.0" onMouseClicked="#editReceptionist" prefHeight="45.0" prefWidth="262.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="415.0" layoutY="682.0" onMouseClicked="#deleteTrainor" prefHeight="45.0" prefWidth="255.0">
+      <Pane layoutX="415.0" layoutY="682.0" onMouseClicked="#deleteReceptionist" prefHeight="45.0" prefWidth="255.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -85,37 +85,37 @@
             <Image url="@../Assets/Icons/search.png" />
          </image>
       </ImageView>
-      <TextField fx:id="IdE" layoutX="242.0" layoutY="154.0" prefHeight="31.0" prefWidth="314.0" promptText="Id" AnchorPane.rightAnchor="810.0">
+      <TextField fx:id="IdE" layoutX="359.0" layoutY="150.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="693.0">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="FirstNameE" layoutX="242.0" layoutY="215.0" prefHeight="46.0" prefWidth="314.0" promptText="First Name">
+      <TextField fx:id="FirstNameE" layoutX="359.0" layoutY="217.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="LastNameE" layoutX="242.0" layoutY="281.0" prefHeight="46.0" prefWidth="314.0" promptText="Last Name">
+      <TextField fx:id="LastNameE" layoutX="359.0" layoutY="277.0" prefHeight="45.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="EmailE" layoutX="242.0" layoutY="346.0" prefHeight="46.0" prefWidth="314.0" promptText="Email">
+      <TextField fx:id="EmailE" layoutX="359.0" layoutY="344.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="PhoneE" layoutX="268.0" layoutY="405.0" prefHeight="46.0" prefWidth="314.0" promptText="Phone Number">
+      <TextField fx:id="PhoneE" layoutX="359.0" layoutY="405.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="AddressE" layoutX="242.0" layoutY="472.0" prefHeight="46.0" prefWidth="314.0" promptText="Address">
+      <TextField fx:id="AddressE" layoutX="359.0" layoutY="472.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="PaymentE" layoutX="349.0" layoutY="540.0" prefHeight="46.0" prefWidth="314.0" promptText="Payment Information">
+      <TextField fx:id="PaymentE" layoutX="359.0" layoutY="534.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="22.0" />
          </font>

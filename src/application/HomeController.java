@@ -165,7 +165,7 @@ public class HomeController implements Initializable {
 		Stage member = new Stage();
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Sample.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/UserInterface/Sample.fxml"));
 			Scene scene = new Scene(root);
 			member.setScene(scene);
 			member.show();
@@ -180,7 +180,7 @@ public class HomeController implements Initializable {
 		Stage program = new Stage();
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Program.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/UserInterface/Program.fxml"));
 			Scene scene = new Scene(root);
 			program.setScene(scene);
 			program.show();
@@ -195,7 +195,7 @@ public class HomeController implements Initializable {
 		Stage program = new Stage();
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("equipments.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/UserInterface/equipments.fxml"));
 			Scene scene = new Scene(root);
 			program.setScene(scene);
 			program.show();
@@ -210,7 +210,37 @@ public class HomeController implements Initializable {
 		Stage program = new Stage();
 		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("Membership.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/UserInterface/Membership.fxml"));
+			Scene scene = new Scene(root);
+			program.setScene(scene);
+			program.show();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+    public void getTrainorScene() {
+		memberBtn.getScene().getWindow().hide();
+		Stage program = new Stage();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/UserInterface/Trainor.fxml"));
+			Scene scene = new Scene(root);
+			program.setScene(scene);
+			program.show();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+    public void getReceptionistScene() {
+		memberBtn.getScene().getWindow().hide();
+		Stage program = new Stage();
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/UserInterface/Receptionist.fxml"));
 			Scene scene = new Scene(root);
 			program.setScene(scene);
 			program.show();
