@@ -12,8 +12,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {	
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/UserInterface/Sample.fxml"));
-			Scene scene = new Scene(root,1366,768);
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/UserInterface/Member.fxml"));
+			Scene scene = new Scene(root,1366,796);
 			scene.getStylesheets().add(getClass().getResource("/UserInterface/application.css").toExternalForm());
 			primaryStage.setTitle("Sign In");
 			primaryStage.setScene(scene);
