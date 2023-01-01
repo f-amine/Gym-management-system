@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -35,7 +37,7 @@
                               <Image url="@../Assets/Icons/search.png" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="test" layoutX="121.0" layoutY="166.0" onMouseClicked="#getSelectedData" prefHeight="574.0" prefWidth="1231.0">
+                        <TableView fx:id="test" layoutX="117.0" layoutY="167.0" onMouseClicked="#getSelectedData" prefHeight="574.0" prefWidth="1231.0">
                           <columns>
                             <TableColumn fx:id="col_Id" prefWidth="71.0" text="Member Id" />
                             <TableColumn fx:id="col_Membership" prefWidth="113.0" text="membershiptype" />
@@ -108,64 +110,57 @@
                               <Image url="@../Assets/Member2.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="IdE" layoutX="377.0" layoutY="113.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="675.0">
+                        <TextField fx:id="IdE" layoutX="377.0" layoutY="113.0" prefHeight="31.0" prefWidth="314.0" AnchorPane.rightAnchor="675.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="FirstNameE" layoutX="377.0" layoutY="378.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="FirstNameE" layoutX="377.0" layoutY="378.0" prefHeight="46.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="LastNameE" layoutX="377.0" layoutY="467.0" prefHeight="45.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="LastNameE" layoutX="377.0" layoutY="467.0" prefHeight="45.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="EmailE" layoutX="1002.0" layoutY="113.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="EmailE" layoutX="1002.0" layoutY="113.0" prefHeight="46.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="PhoneE" layoutX="1002.0" layoutY="202.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="PhoneE" layoutX="1002.0" layoutY="202.0" prefHeight="46.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="AddressE" layoutX="1002.0" layoutY="291.0" prefHeight="46.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="AddressE" layoutX="1002.0" layoutY="291.0" prefHeight="46.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="MembershipTypeE" layoutX="377.0" layoutY="202.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="PaymentE" layoutX="1002.0" layoutY="384.0" prefHeight="31.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="ProgramE" layoutX="377.0" layoutY="291.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField fx:id="ContactE" layoutX="1002.0" layoutY="473.0" prefHeight="31.0" prefWidth="314.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="PaymentE" layoutX="1002.0" layoutY="384.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+                        <TextField layoutX="1002.0" layoutY="563.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="ContactE" layoutX="1002.0" layoutY="473.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="MembershipExpirationE" layoutX="1002.0" layoutY="563.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </TextField>
-                        <Pane layoutX="169.0" layoutY="543.0" prefHeight="43.0" prefWidth="254.0" />
-                        <Pane layoutX="169.0" layoutY="598.0" prefHeight="43.0" prefWidth="254.0" />
-                        <Pane layoutX="169.0" layoutY="654.0" prefHeight="43.0" prefWidth="254.0" />
+                        <Pane layoutX="169.0" layoutY="543.0" onMouseClicked="#addMember" prefHeight="43.0" prefWidth="254.0" />
+                        <Pane layoutX="169.0" layoutY="598.0" onMouseClicked="#editMember" prefHeight="43.0" prefWidth="254.0" />
+                        <Pane layoutX="169.0" layoutY="654.0" onMouseClicked="#deleteMember" prefHeight="43.0" prefWidth="254.0" />
+                        <DatePicker fx:id="MembershipExpirationE" layoutX="1004.0" layoutY="565.0" prefHeight="43.0" prefWidth="318.0" />
+                        <ChoiceBox fx:id="MembershipTypeE" layoutX="381.0" layoutY="202.0" prefHeight="47.0" prefWidth="306.0" />
+                        <ChoiceBox fx:id="ProgramE" layoutX="381.0" layoutY="291.0" prefHeight="47.0" prefWidth="306.0" />
                      </children>
                   </AnchorPane>
             </content>

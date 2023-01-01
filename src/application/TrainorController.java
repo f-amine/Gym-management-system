@@ -130,7 +130,7 @@ public class TrainorController implements Initializable{
 			pst=connection.prepareStatement(q1);
 			pst.setString(1, IdE.getText());
 			pst.execute();
-			JOptionPane.showMessageDialog(null, " deleted succesfully");
+			JOptionPane.showMessageDialog(null, "Trainor deleted succesfully");
 			test.setItems(loadData());
 			search_Trainor();
 		} catch (SQLException e) {
