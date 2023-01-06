@@ -6,8 +6,8 @@ module boba {
 	requires com.jfoenix;
 	requires javafx.base;
 	requires java.desktop;
+	requires org.apache.pdfbox;
 	
 	opens appClasses to javafx.base;
-
 	opens application to javafx.graphics, javafx.fxml;
 }

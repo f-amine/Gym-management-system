@@ -87,11 +87,7 @@ public class HomeController implements Initializable {
     //count the number of members whose membership expires in each month of the current year
     public void getMemberGraphData() {
     	 
-    	String q1 = "SELECT COUNT(*) AS 'Number of Members', "
-    			+ "MONTHNAME(membershipExpiration) AS 'Month' FROM Member "
-    			+ "WHERE MONTH(membershipExpiration) "
-    			+ "BETWEEN MONTH(DATE_ADD(CURRENT_DATE, INTERVAL -1 MONTH)) AND MONTH(DATE_ADD(CURRENT_DATE, INTERVAL -12 MONTH))"
-    			+ " GROUP BY MONTH(membershipExpiration)";
+    	String q1 = "SELECT MONTH(date) as 'month', COUNT(*) as 'Number of Members' FROM payment WHERE date >= DATE_ADD(CURRENT_DATE, INTERVAL -1 YEAR) GROUP BY MONTH(date);";
 		try {
 			Statement st=connection.createStatement();
 			ResultSet rs = st.executeQuery(q1);

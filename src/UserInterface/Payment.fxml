@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PaymentController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1366.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/Payment.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="205.0" onMouseClicked="#getMembersScene" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="281.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="354.0" prefHeight="51.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="438.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="17.0" layoutY="518.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="14.0" layoutY="598.0" onMouseClicked="#getProgramScene" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="14.0" layoutY="671.0" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <TableView fx:id="test" layoutX="751.0" layoutY="187.0" onMouseClicked="#getSelectedData" prefHeight="498.0" prefWidth="581.0">
+        <columns>
+          <TableColumn fx:id="col_Id" prefWidth="102.0" text="Payment Id" />
+          <TableColumn fx:id="col_Name" prefWidth="147.0" text="Member Name" />
+            <TableColumn fx:id="col_Amount" prefWidth="108.0" text="Amount" />
+            <TableColumn fx:id="col_Date" prefWidth="103.0" text="Date" />
+            <TableColumn fx:id="col_Payment" prefWidth="120.0" text="Payment Method" />
+        </columns>
+      </TableView>
+      <TextField fx:id="filterField" layoutX="940.0" layoutY="118.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="32.0" fitWidth="38.0" layoutX="896.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/Icons/search.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="IdE" layoutX="351.0" layoutY="150.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;" AnchorPane.rightAnchor="701.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="MemberE" editable="true" layoutX="358.0" layoutY="214.0" prefHeight="46.0" prefWidth="314.0" />
+      <ComboBox fx:id="PaymenE" editable="true" layoutX="358.0" layoutY="413.0" prefHeight="46.0" prefWidth="314.0" />
+      <DatePicker fx:id="DateE" layoutX="358.0" layoutY="347.0" prefHeight="45.0" prefWidth="314.0" />
+      <TextField fx:id="AmountE" layoutX="358.0" layoutY="281.0" prefHeight="31.0" prefWidth="314.0" style="-fx-background-color: transparent;">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <Pane layoutX="262.0" layoutY="496.0" onMouseClicked="#confirmPayment" prefHeight="39.0" prefWidth="255.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="262.0" layoutY="563.0" onMouseClicked="#generateReceipt" prefHeight="39.0" prefWidth="255.0" />
+   </children>
+</AnchorPane>

@@ -3,23 +3,32 @@ package appClasses;
 import java.util.Date;
 
 public class Payment {
-  private String paymentId;
+  private int paymentId;
   private double amount;
   private Date date;
   private String paymentMethod;
-  private String paymentStatus;
   public Member member;
+  private String memberName;
 
-  public Payment(String paymentId, Date date, String paymentMethod, String paymentStatus, Member member) {
+  public Payment(int paymentId, Date date, String paymentMethod, Member member) {
     this.paymentId = paymentId;
     this.amount = this.member.getMembershipType().getPrice();
     this.date = date;
     this.paymentMethod = paymentMethod;
-    this.paymentStatus = paymentStatus;
     this.member = member;
   }
+  
 
-  public String getPaymentId() {
+  public Payment(int paymentId,String memberName, double amount, Date date, String paymentMethod) {
+	this.paymentId = paymentId;
+	this.amount = amount;
+	this.date = date;
+	this.paymentMethod = paymentMethod;
+	this.memberName = memberName;
+}
+
+
+public int getPaymentId() {
     return paymentId;
   }
 
@@ -35,12 +44,15 @@ public class Payment {
     return paymentMethod;
   }
 
-  public String getPaymentStatus() {
-    return paymentStatus;
-  }
 
-  public void setPaymentStatus(String paymentStatus) {
-    this.paymentStatus = paymentStatus;
-  }
+public String getMemberName() {
+	return memberName;
+}
+
+
+public void setMemberName(String memberName) {
+	this.memberName = memberName;
+}
+  
 }
 
