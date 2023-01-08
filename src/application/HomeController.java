@@ -155,46 +155,39 @@ public class HomeController implements Initializable {
 		}
 		return count;
     }
-  //Change scene to members Page
-    public void getMembersScene() {
-		memberBtn.getScene().getWindow().hide();
-		Stage member = new Stage();
-		Parent root;
+
+    public void getHomeScene() {
+		Main m = new Main();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/UserInterface/Sample.fxml"));
-			Scene scene = new Scene(root);
-			member.setScene(scene);
-			member.show();
+			m.changeSceen("/UserInterface/Home.fxml");
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
 	}
-    //Change scene to program Page
-    public void getProgramScene() {
-		memberBtn.getScene().getWindow().hide();
-		Stage program = new Stage();
-		Parent root;
+
+    public void getMembersScene() {
+		Main m = new Main();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/UserInterface/Program.fxml"));
-			Scene scene = new Scene(root);
-			program.setScene(scene);
-			program.show();
+			m.changeSceen("/UserInterface/Member.fxml");
 		} catch (IOException e) {
-			
 			e.printStackTrace();
 		}
 	}
     
-    public void getEquipmentsScene() {
-		memberBtn.getScene().getWindow().hide();
-		Stage program = new Stage();
-		Parent root;
+    public void getReceptionistScene() {
+		Main m = new Main();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/UserInterface/equipments.fxml"));
-			Scene scene = new Scene(root);
-			program.setScene(scene);
-			program.show();
+			m.changeSceen("/UserInterface/Receptionist.fxml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void getTrainorScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Trainor.fxml");
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -202,50 +195,51 @@ public class HomeController implements Initializable {
 	}
     
     public void getMembershipOfferScene() {
-		memberBtn.getScene().getWindow().hide();
-		Stage program = new Stage();
-		Parent root;
+		Main m = new Main();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/UserInterface/Membership.fxml"));
-			Scene scene = new Scene(root);
-			program.setScene(scene);
-			program.show();
+			m.changeSceen("/UserInterface/Membership.fxml");
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
 	}
     
-    public void getTrainorScene() {
-		memberBtn.getScene().getWindow().hide();
-		Stage program = new Stage();
-		Parent root;
+    public void getEquipmentsScene() {
+		Main m = new Main();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/UserInterface/Trainor.fxml"));
-			Scene scene = new Scene(root);
-			program.setScene(scene);
-			program.show();
+			m.changeSceen("/UserInterface/equipments.fxml");
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
 	}
     
-    public void getReceptionistScene() {
-		memberBtn.getScene().getWindow().hide();
-		Stage program = new Stage();
-		Parent root;
+
+    public void getProgramScene() {
+		Main m = new Main();
 		try {
-			root = FXMLLoader.load(getClass().getResource("/UserInterface/Receptionist.fxml"));
-			Scene scene = new Scene(root);
-			program.setScene(scene);
-			program.show();
+			m.changeSceen("/UserInterface/Program.fxml");
 		} catch (IOException e) {
 			
 			e.printStackTrace();
 		}
 	}
     
+
+    public void getPaymentScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Payment.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+
+    
+
+
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new dbConnection();

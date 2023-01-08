@@ -1,24 +1,33 @@
 package application;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import appClasses.Payment;
 import appClasses.dbConnection;
@@ -140,67 +149,173 @@ public class PaymentController implements Initializable {
 			e.printStackTrace();
 		}
     }
-    
-    @FXML
-    void generateReceipt(MouseEvent event) {
-    	try {
-    		File file = new File("template.pdf");
-			PDDocument template = PDDocument.load(file);
-			PDFTextStripper stripper = new PDFTextStripper();
-			String templateText = stripper.getText(template);
-			template.close();
-	    	Payment= test.getSelectionModel().getSelectedItem();
-	    	String name = Integer.valueOf(Payment.getPaymentId()).toString();
-	    	String amount = Double.valueOf(Payment.getAmount()).toString();
-	    	Date date = (Date) Payment.getDate();
-	    	LocalDate localDate = date.toLocalDate();
-	    	String datePayment = Date.valueOf(localDate).toString();
-	    	String PaymentMethod = Payment.getPaymentMethod();
-	    	String modifiedText = templateText.replace("{name}", name).replace("{amount}", amount).replace("{date}", datePayment).replace("{paymentMethod}", PaymentMethod).replace("\n", "").replace("\r", "");
-	    	PDDocument document = new PDDocument();
-	    	PDPage page = new PDPage();
-	    	document.addPage(page);
-	    	PDPageContentStream contentStream = new PDPageContentStream(document, page);
-	    	contentStream.beginText();
-	    	contentStream.newLineAtOffset(25, 700);
-	    	contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-	    	contentStream.showText(modifiedText);
-	    	contentStream.endText();
-	    	contentStream.close();
-	    	document.save("output.pdf");
-	    	document.close();
-		} catch (IOException e) {
+    private static void addReceiptHeader(PdfPTable table) {
+        Image logo;
+		try {
+			logo = Image.getInstance("C:\\Users\\Smiloxham\\Desktop\\testGYM\\boba\\src\\Receipts\\gym-logo.png");
+	        logo.scaleAbsolute(229, 56);
+	        PdfPCell logoCell = new PdfPCell(logo, false);
+	        logoCell.setBorder(Rectangle.NO_BORDER);
+	        table.addCell(logoCell);
 
+		} catch (BadElementException e) {
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        PdfPCell titleCell = new PdfPCell(new Paragraph("Membership Payment Receipt"));
+        titleCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        titleCell.setBorder(Rectangle.NO_BORDER);
+        table.addCell(titleCell);
+        table.addCell("");
+        table.addCell("");
     }
-    
-    
-    
-    
+    private void addPaymentDetails(PdfPTable table) {
+        // Add the payment details
+    	Payment= test.getSelectionModel().getSelectedItem();
+    	Date date = (Date) Payment.getDate();
+    	LocalDate localDate = date.toLocalDate();
+    	table.addCell("Receipt No:");
+    	table.addCell(Integer.valueOf(Payment.getPaymentId()).toString());
+        table.addCell("Payment Date:");
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        table.addCell(Date.valueOf(localDate).toString());
+        table.addCell("Member Name :");
+        table.addCell(Payment.getMemberName());
+        table.addCell("Workout Type:");
+        table.addCell("GYM");
+        table.addCell("Payment Amount:");
+        table.addCell(Double.valueOf(Payment.getAmount()).toString());
+        table.addCell("Payment Method:");
+        table.addCell(Payment.getPaymentMethod());
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+        table.addCell("");
+    }
+    private static void addReceiptFooter(PdfPTable table) {
+        table.addCell("");
+        table.addCell("");
+        PdfPCell footerCell = new PdfPCell(new Paragraph("Receiver Signature"));
+        footerCell.setColspan(2);
+        footerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        footerCell.setBorder(Rectangle.NO_BORDER);
+        table.addCell(footerCell);
+    }
     @FXML
-    void getMembersScene(MouseEvent event) {
-
+    void generateReceipt(MouseEvent event) {
+        Document document = new Document();
+        PdfPTable table = new PdfPTable(2);
+            try {
+				PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Smiloxham\\Desktop\\testGYM\\boba\\src\\Receipts\\"+Payment.getMemberName()+" receipt.pdf"));
+	            document.open();
+	            addReceiptHeader(table);
+	            addPaymentDetails(table);
+	            addReceiptFooter(table);
+	            document.add(table);
+	            document.close();
+	            JOptionPane.showMessageDialog(null, "Receipt Generated Succesfully");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (DocumentException e) {
+				e.printStackTrace();
+			}
     }
-
-    @FXML
-    void getProgramScene(MouseEvent event) {
-
-    }
-
     @FXML
     void getSelectedData(MouseEvent event) {
     	Payment= test.getSelectionModel().getSelectedItem();
     	if (Payment != null) {
     	IdE.setText(Integer.valueOf(Payment.getPaymentId()).toString());
     	MemberE.setValue(col_Name.getCellData(Payment).toString());
-    	AmountE.setText(Double.valueOf(Payment.getAmount()).toString());;
+    	AmountE.setText(Double.valueOf(Payment.getAmount()).toString());
     	Date date = (Date) Payment.getDate();
     	LocalDate localDate = date.toLocalDate();
     	DateE.setValue(localDate);
     	PaymenE.setValue(col_Payment.getCellData(Payment).toString());
     	}
     }
+    public void getHomeScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Home.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+    public void getMembersScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Member.fxml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void getReceptionistScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Receptionist.fxml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void getTrainorScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Trainor.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+    public void getMembershipOfferScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Membership.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+    public void getEquipmentsScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/equipments.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+
+    public void getProgramScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Program.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+
+    public void getPaymentScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Payment.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

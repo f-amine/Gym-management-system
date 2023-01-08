@@ -17,7 +17,7 @@
             <Image url="@../Assets/Receptionist.png" />
          </image>
       </ImageView>
-      <Pane layoutX="17.0" layoutY="128.0" prefHeight="45.0" prefWidth="50.0">
+      <Pane layoutX="17.0" layoutY="128.0" onMouseClicked="#getHomeScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
@@ -25,19 +25,19 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="17.0" layoutY="281.0" prefHeight="45.0" prefWidth="50.0">
+      <Pane layoutX="17.0" layoutY="281.0" onMouseClicked="#getReceptionistScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="17.0" layoutY="354.0" prefHeight="51.0" prefWidth="50.0">
+      <Pane layoutX="17.0" layoutY="354.0" onMouseClicked="#getTrainorScene" prefHeight="51.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="17.0" layoutY="438.0" prefHeight="45.0" prefWidth="50.0">
+      <Pane layoutX="17.0" layoutY="438.0" onMouseClicked="#getMembershipOfferScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="17.0" layoutY="518.0" prefHeight="45.0" prefWidth="50.0">
+      <Pane layoutX="17.0" layoutY="518.0" onMouseClicked="#getEquipmentsScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
@@ -45,7 +45,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="14.0" layoutY="671.0" prefHeight="45.0" prefWidth="50.0">
+      <Pane layoutX="14.0" layoutY="671.0" onMouseClicked="#getPaymentScene" prefHeight="45.0" prefWidth="50.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -120,5 +120,10 @@
             <Font size="22.0" />
          </font>
       </TextField>
+      <Pane layoutX="14.0" layoutY="14.0" onMouseClicked="#getHomeScene" prefHeight="45.0" prefWidth="50.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
    </children>
 </AnchorPane>

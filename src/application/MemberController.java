@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -333,6 +334,86 @@ public class MemberController implements Initializable{
         sortedData.comparatorProperty().bind(test.comparatorProperty());  
         test.setItems(sortedData);      
     }
+    public void getHomeScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Home.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+
+    public void getMembersScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Member.fxml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void getReceptionistScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Receptionist.fxml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+    public void getTrainorScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Trainor.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+    public void getMembershipOfferScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Membership.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+    public void getEquipmentsScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/equipments.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+
+    public void getProgramScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Program.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
+
+    public void getPaymentScene() {
+		Main m = new Main();
+		try {
+			m.changeSceen("/UserInterface/Payment.fxml");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+    
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
