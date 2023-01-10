@@ -12,7 +12,7 @@ import java.net.URL;
 
 
 	import appClasses.Equipment;
-	import appClasses.dbConnection;
+import appClasses.dbConnection;
 	import javafx.collections.FXCollections;
 	import javafx.collections.ObservableList;
 	import javafx.collections.transformation.FilteredList;
@@ -23,7 +23,8 @@ import java.net.URL;
 	import javafx.scene.control.TableView;
 	import javafx.scene.control.TextField;
 	import javafx.scene.control.cell.PropertyValueFactory;
-	import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 	
 	
 public class equipmentsController implements Initializable {
@@ -197,6 +198,29 @@ public class equipmentsController implements Initializable {
 	        sortedData.comparatorProperty().bind(test.comparatorProperty());  
 	        test.setItems(sortedData);      
 	    }
+	    @FXML
+	    void  Search(KeyEvent event) {
+	    try {
+	    	connection = handler.getConnection();
+	    	String q1 = "SELECT * FROM equipment where equipmentId like '%"+filterField.getText()+"%' or name like '%"+filterField.getText()+"%'  or quantity like '%"+filterField.getText()+ "%' or pricePerUnit like '%"+filterField.getText()+"%'";
+	    	dataList=FXCollections.observableArrayList();
+	    	pst= connection.prepareStatement(q1);
+	   
+	    ResultSet rs = pst.executeQuery();
+	    while(rs.next())
+	    {
+	    	dataList.add(new Equipment(rs.getInt("equipmentId"),rs.getString("name"),rs.getInt("quantity"),rs.getDouble("pricePerUnit")));
+	    }
+	    }catch(Exception e)
+	    {
+	    e.printStackTrace();
+	    }
+		col_Id.setCellValueFactory(new PropertyValueFactory<Equipment, String>("equipementId"));
+		col_Name.setCellValueFactory(new PropertyValueFactory<Equipment, String>("name"));
+		col_Price.setCellValueFactory(new PropertyValueFactory<Equipment, String>("pricePerUnit"));
+		col_Quantity.setCellValueFactory(new PropertyValueFactory<Equipment, String>("quantity"));   
+	    test.setItems(dataList);
+	    }
 	    public void getHomeScene() {
 			Main m = new Main();
 			try {
@@ -276,6 +300,7 @@ public class equipmentsController implements Initializable {
 				e.printStackTrace();
 			}
 		}
+	    
 	    
 	    
 		@Override

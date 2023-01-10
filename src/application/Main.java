@@ -43,7 +43,6 @@ public class Main extends Application {
 	}
 	public void changeMemberSceen(String fxml) throws IOException{
 		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-		Scene scene = new Scene(pane,1366,796);
 		stg.getScene().setRoot(pane);
 	}
 	public static void main(String[] args) {

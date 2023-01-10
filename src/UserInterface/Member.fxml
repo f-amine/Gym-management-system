@@ -27,7 +27,7 @@
                               <Image url="@../Assets/Member1.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="filterField" layoutX="604.0" layoutY="115.0" prefHeight="44.0" prefWidth="257.0" promptText="Search">
+                        <TextField fx:id="filterField" layoutX="604.0" layoutY="115.0" onKeyTyped="#Search" prefHeight="44.0" prefWidth="257.0" promptText="Search">
                            <font>
                               <Font size="20.0" />
                            </font>

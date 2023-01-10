@@ -10,15 +10,11 @@ import java.util.ResourceBundle;
 
 import appClasses.dbConnection;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
 	
@@ -63,7 +59,8 @@ public class HomeController implements Initializable {
     
     
 // ______________________________________________________________________________________________________________________________________
-    public void getRevenueGraphData() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getRevenueGraphData() {
  
     	String q1 = "SELECT MONTH(date) AS month, SUM(amount) AS total_amount FROM payment WHERE YEAR(date) = YEAR(CURDATE()) GROUP BY MONTH(date)";
 		try {
@@ -85,7 +82,8 @@ public class HomeController implements Initializable {
 
     }
     //count the number of members whose membership expires in each month of the current year
-    public void getMemberGraphData() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public void getMemberGraphData() {
     	 
     	String q1 = "SELECT MONTH(date) as 'month', COUNT(*) as 'Number of Members' FROM payment WHERE date >= DATE_ADD(CURRENT_DATE, INTERVAL -1 YEAR) GROUP BY MONTH(date);";
 		try {

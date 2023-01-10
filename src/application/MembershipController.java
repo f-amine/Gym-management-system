@@ -12,14 +12,13 @@ import appClasses.MembershipOffer;
 import appClasses.dbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class MembershipController implements Initializable {
@@ -98,7 +97,6 @@ public class MembershipController implements Initializable {
 			pst.setString(4, PriceE.getText());
 			pst.execute();
 			test.setItems(loadData());
-			search_Equipment();
 			JOptionPane.showMessageDialog(null, "MembershipOffer added succesfully");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -143,7 +141,6 @@ public class MembershipController implements Initializable {
 			pst.execute();
 			JOptionPane.showMessageDialog(null, "membershipOfferId deleted succesfully");
 			test.setItems(loadData());
-			search_Equipment();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 			e.printStackTrace();
@@ -153,44 +150,29 @@ public class MembershipController implements Initializable {
     
   
     @FXML
-    void search_Equipment() {          
-		col_Id.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("id"));
-		col_Name.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("name"));
-		col_Duration.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
-		col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));
-        dataList = loadData();
-        test.setItems(dataList);
-        FilteredList<MembershipOffer> filteredData = new FilteredList<>(dataList, b -> true);  
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-        	filteredData.setPredicate(person -> {
-        		if (newValue == null || newValue.isEmpty()) {
-        			return true;
-        		}    
-    String lowerCaseFilter = newValue.toLowerCase();
-    
-    	if (person.getName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-    		{
-    			return true; // Filter matches Name
-    		} 
-    	else if (person.getId() != -1) 
-    	{
-    			return true; // Filter matches Description
-    	}
-    	else if (person.getDuration() != -1) 
-    	{
-    			return true; // Filter matches Description
-    	}
-    	else if (person.getPrice() != -1) 
-    	{
-    			return true; // Filter matches Description
-    	}
-         else  
-          return false; // Does not match.
-        });
-        });  
-        SortedList<MembershipOffer> sortedData = new SortedList<>(filteredData);  
-        sortedData.comparatorProperty().bind(test.comparatorProperty());  
-        test.setItems(sortedData);      
+    void  Search(KeyEvent event) {
+    try {
+    	connection = handler.getConnection();
+    	String q1 = "SELECT * FROM membershipoffer where (membershipOfferId like '$"+filterField.getText()+"%' or name like '%"+filterField.getText()+"%'  or duration like '%"+filterField.getText()+"%' or price like '%"+filterField.getText()+"%') ";
+    	dataList=FXCollections.observableArrayList();
+    	pst= connection.prepareStatement(q1);
+   
+    ResultSet rs = pst.executeQuery();
+    while(rs.next())
+    {
+    	dataList.add(new MembershipOffer(rs.getInt("membershipOfferId"),rs.getString("name"),rs.getInt("duration"),rs.getDouble("price")));	
+    }
+    }catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+   
+	col_Id.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("id"));
+	col_Name.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("name"));
+	col_Duration.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
+	col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));
+	
+    test.setItems(dataList);
     }
     public void getHomeScene() {
 		Main m = new Main();
@@ -281,7 +263,6 @@ public class MembershipController implements Initializable {
 		col_Duration.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("duration"));
 		col_Price.setCellValueFactory(new PropertyValueFactory<MembershipOffer, String>("price"));
 		test.setItems(loadData());
-		search_Equipment();
 	}
 
 }

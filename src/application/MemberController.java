@@ -15,8 +15,6 @@ import appClasses.Member;
 import appClasses.dbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -25,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class MemberController implements Initializable{
@@ -260,79 +259,36 @@ public class MemberController implements Initializable{
     	}
     }
     @FXML
-    void search_Trainor() {          
-		col_Id.setCellValueFactory(new PropertyValueFactory<Member, String>("id"));
-		col_Membership.setCellValueFactory(new PropertyValueFactory<Member, String>("membershipoffer"));
-		col_Program.setCellValueFactory(new PropertyValueFactory<Member, String>("ProgramName"));
-		col_FirstName.setCellValueFactory(new PropertyValueFactory<Member, String>("firstName"));
-		col_LastName.setCellValueFactory(new PropertyValueFactory<Member, String>("lastName"));
-		col_Email.setCellValueFactory(new PropertyValueFactory<Member, String>("email"));
-		col_Phone.setCellValueFactory(new PropertyValueFactory<Member, String>("PhoneNumber"));
-		col_Address.setCellValueFactory(new PropertyValueFactory<Member, String>("address"));
-		col_Payment.setCellValueFactory(new PropertyValueFactory<Member, String>("paymentInformation"));
-		col_Contact.setCellValueFactory(new PropertyValueFactory<Member, String>("emergencyContactInfo"));
-		col_MembershipEx.setCellValueFactory(new PropertyValueFactory<Member, String>("membershipExpiration"));
-        dataList = loadData();
-        test.setItems(dataList);
-        FilteredList<Member> filteredData = new FilteredList<>(dataList, b -> true);  
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-        	filteredData.setPredicate(person -> {
-        		if (newValue == null || newValue.isEmpty()) {
-        			return true;
-        		}    
-    String lowerCaseFilter = newValue.toLowerCase();
+    void  Search(KeyEvent event) {
+    try {
+    	connection = handler.getConnection();
+    	String q1 = "SELECT * FROM member where (memberId like '$"+filterField.getText()+"%' or firstName like '%"+filterField.getText()+"%'  or lastName like '%"+filterField.getText()+ "%' or email like '%"+filterField.getText()+"%' or phoneNumber like '%"+filterField.getText()+"%'  or address like '%"+filterField.getText()+"%' or paymentInformation like '%"+filterField.getText()+"%') ";
+    	dataList=FXCollections.observableArrayList();
+    	pst= connection.prepareStatement(q1);
    
-    	if (person.getId() != -1) 
-    	{
-    		return true;
-    	}
-    	else if (person.getMembershipoffer().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getProgramName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		}
-    	else if (person.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true;
-		}
-    	else if (person.getPhoneNumber().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getAddress().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getPaymentInformation().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getEmergencyContactInfo().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getMembershipExpiration() != null ) 
-		{
-			return true; 
-		}
-        else  
-          return false; 
-        });
-        });  
-        SortedList<Member> sortedData = new SortedList<>(filteredData);  
-        sortedData.comparatorProperty().bind(test.comparatorProperty());  
-        test.setItems(sortedData);      
+    ResultSet rs = pst.executeQuery();
+    while(rs.next())
+    {
+	    dataList.add(new Member(rs.getInt("memberId"), rs.getString("membershiptype"),rs.getString("Program"),rs.getString("firstName")
+	    		,rs.getString("lastName"),rs.getString("email"),rs.getString("phoneNumber"),rs.getString("address"),rs.getString("paymentInformation")
+	    		,rs.getString("emergencyContactInfo"),rs.getDate("membershipExpiration")));
+    }
+    }catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+	col_Id.setCellValueFactory(new PropertyValueFactory<Member, String>("id"));
+	col_Membership.setCellValueFactory(new PropertyValueFactory<Member, String>("membershipoffer"));
+	col_Program.setCellValueFactory(new PropertyValueFactory<Member, String>("ProgramName"));
+	col_FirstName.setCellValueFactory(new PropertyValueFactory<Member, String>("firstName"));
+	col_LastName.setCellValueFactory(new PropertyValueFactory<Member, String>("lastName"));
+	col_Email.setCellValueFactory(new PropertyValueFactory<Member, String>("email"));
+	col_Phone.setCellValueFactory(new PropertyValueFactory<Member, String>("PhoneNumber"));
+	col_Address.setCellValueFactory(new PropertyValueFactory<Member, String>("address"));
+	col_Payment.setCellValueFactory(new PropertyValueFactory<Member, String>("paymentInformation"));
+	col_Contact.setCellValueFactory(new PropertyValueFactory<Member, String>("emergencyContactInfo"));
+	col_MembershipEx.setCellValueFactory(new PropertyValueFactory<Member, String>("membershipExpiration"));
+    test.setItems(dataList);
     }
     public void getHomeScene() {
 		Main m = new Main();

@@ -11,12 +11,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
+
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
@@ -41,7 +40,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 public class PaymentController implements Initializable {
 
@@ -127,7 +133,84 @@ public class PaymentController implements Initializable {
 		return list;
     	
     	}
-    
+ /*   @FXML
+   void MemberDataSheet(MouseEvent event) {
+    	connection = handler.getConnection();
+    	String q1 = "Select firstname,lastname,email,phoneNumber,address,paymentInformation,emergencyContactInfo,membershipExpiration from member ";
+        try {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("MemberData");
+			try {
+				pst=connection.prepareStatement(q1);
+				ResultSet rs = pst.executeQuery();
+	            int rowCount = 0;
+	            while (rs.next()) {
+	                XSSFRow row = sheet.createRow(rowCount++);
+	                XSSFCell cell0 = row.createCell(0);
+	                cell0.setCellValue(rs.getString("firstname"));
+	                XSSFCell cell1 = row.createCell(0);
+	                cell1.setCellValue(rs.getString("lastname"));
+	                XSSFCell cell2 = row.createCell(0);
+	                cell2.setCellValue(rs.getString("email"));
+	                XSSFCell cell3 = row.createCell(0);
+	                cell3.setCellValue(rs.getString("phoneNumber"));
+	                XSSFCell cell4 = row.createCell(0);
+	                cell4.setCellValue(rs.getString("address"));
+	                XSSFCell cell5 = row.createCell(0);
+	                cell5.setCellValue(rs.getString("paymentInformation"));
+	                XSSFCell cell6 = row.createCell(0);
+	                cell6.setCellValue(rs.getString("emergencyContactInfo"));
+	                XSSFCell cell7 = row.createCell(0);
+	                cell7.setCellValue(rs.getString("membershipExpiration"));
+	            }}catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+	        
+            FileOutputStream out;
+				out = new FileOutputStream("MyFile.xlsx");
+				workbook.write(out);
+		        out.close();
+		        workbook.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} */
+    @FXML
+    void MemberDataSheet(MouseEvent event) throws IOException, RowsExceededException, WriteException {
+    	connection = handler.getConnection();
+    	String q1 = "Select firstname,lastname,email,phoneNumber,address,paymentInformation,emergencyContactInfo,membershipExpiration from member ";
+    	try {
+			pst=connection.prepareStatement(q1);
+			ResultSet rs = pst.executeQuery();
+            File file = new File("data.xlsx");
+            WritableWorkbook workbook = Workbook.createWorkbook(file);
+            WritableSheet sheet = workbook.createSheet("Sheet1", 0);
+            int columnCount = rs.getMetaData().getColumnCount();
+            for (int i = 0; i < columnCount; i++) {
+                String columnName = rs.getMetaData().getColumnName(i + 1);
+                Label label = new Label(i, 0, columnName);
+                sheet.addCell(label);
+            }
+         // Write the data to the sheet
+            int rowCount = 1;
+            while (rs.next()) {
+                for (int i = 0; i < columnCount; i++) {
+                    String value = rs.getString(i + 1);
+                    Label label = new Label(i, rowCount, value);
+                    sheet.addCell(label);
+                }
+                rowCount++;
+            }
+            workbook.write();
+            workbook.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
     
     @FXML
     void confirmPayment(MouseEvent event) {
@@ -180,7 +263,6 @@ public class PaymentController implements Initializable {
     	table.addCell("Receipt No:");
     	table.addCell(Integer.valueOf(Payment.getPaymentId()).toString());
         table.addCell("Payment Date:");
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         table.addCell(Date.valueOf(localDate).toString());
         table.addCell("Member Name :");
         table.addCell(Payment.getMemberName());
@@ -223,6 +305,7 @@ public class PaymentController implements Initializable {
 				e.printStackTrace();
 			}
     }
+    
     @FXML
     void getSelectedData(MouseEvent event) {
     	Payment= test.getSelectionModel().getSelectedItem();
@@ -235,6 +318,30 @@ public class PaymentController implements Initializable {
     	DateE.setValue(localDate);
     	PaymenE.setValue(col_Payment.getCellData(Payment).toString());
     	}
+    }
+    @FXML
+    void  Search(KeyEvent event) {
+    try {
+    	connection = handler.getConnection();
+    	String q1 = "SELECT * FROM payment where (paymentId like '$"+filterField.getText()+"%' or member like '%"+filterField.getText()+"%'  or amount like '%"+filterField.getText()+"%' or paymentMethod like '%"+filterField.getText()+"%') ";
+    	dataList=FXCollections.observableArrayList();
+    	pst= connection.prepareStatement(q1);
+   
+    ResultSet rs = pst.executeQuery();
+    while(rs.next())
+    {
+    	dataList.add(new Payment(rs.getInt("paymentId"),rs.getString("member") ,rs.getDouble("amount"),rs.getDate("date"),rs.getString("paymentMethod")));	
+    }
+    }catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+	col_Id.setCellValueFactory(new PropertyValueFactory<Payment, String>("paymentId"));
+	col_Name.setCellValueFactory(new PropertyValueFactory<Payment, String>("memberName"));
+	col_Amount.setCellValueFactory(new PropertyValueFactory<Payment, String>("amount"));
+	col_Date.setCellValueFactory(new PropertyValueFactory<Payment, String>("date"));
+	col_Payment.setCellValueFactory(new PropertyValueFactory<Payment, String>("paymentMethod"));
+    test.setItems(dataList);
     }
     public void getHomeScene() {
 		Main m = new Main();

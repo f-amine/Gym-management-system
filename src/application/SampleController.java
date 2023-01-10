@@ -39,7 +39,6 @@ public class SampleController implements Initializable {
 			pst=connection.prepareStatement(q1);
 			pst.setString(1, username.getText());
 			pst.setString(2, password.getText());
-			
 			ResultSet rs = pst.executeQuery();
 			int count=0;
 			while (rs.next()) {

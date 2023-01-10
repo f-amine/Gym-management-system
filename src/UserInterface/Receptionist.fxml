@@ -75,7 +75,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <TextField fx:id="filterField" layoutX="940.0" layoutY="106.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
+      <TextField fx:id="filterField" layoutX="940.0" layoutY="106.0" onKeyTyped="#Search" prefHeight="32.0" prefWidth="204.0" promptText="Search">
          <font>
             <Font size="13.0" />
          </font>

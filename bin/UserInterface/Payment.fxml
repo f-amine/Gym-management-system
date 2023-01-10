@@ -61,7 +61,7 @@
             <TableColumn fx:id="col_Payment" prefWidth="120.0" text="Payment Method" />
         </columns>
       </TableView>
-      <TextField fx:id="filterField" layoutX="940.0" layoutY="118.0" prefHeight="32.0" prefWidth="204.0" promptText="Search">
+      <TextField fx:id="filterField" layoutX="940.0" layoutY="118.0" onKeyTyped="#Search" prefHeight="32.0" prefWidth="204.0" promptText="Search">
          <font>
             <Font size="13.0" />
          </font>
@@ -88,6 +88,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Pane>
-      <Pane layoutX="262.0" layoutY="563.0" onMouseClicked="#generateReceipt" prefHeight="39.0" prefWidth="255.0" />
+      <Pane layoutX="262.0" layoutY="563.0" onMouseClicked="#generateReceipt" prefHeight="39.0" prefWidth="255.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pane>
+      <Pane layoutX="262.0" layoutY="632.0" onMouseClicked="#MemberDataSheet" prefHeight="39.0" prefWidth="255.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
    </children>
 </AnchorPane>

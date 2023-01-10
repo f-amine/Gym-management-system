@@ -12,14 +12,13 @@ import appClasses.Trainor;
 import appClasses.dbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class TrainorController implements Initializable{
@@ -114,7 +113,6 @@ public class TrainorController implements Initializable{
 			pst.setString(7, PaymentE.getText());
 			pst.execute();
 			test.setItems(loadData());
-			search_Trainor();
 			JOptionPane.showMessageDialog(null, "Trainor added succesfully");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
@@ -133,7 +131,6 @@ public class TrainorController implements Initializable{
 			pst.execute();
 			JOptionPane.showMessageDialog(null, "Trainor deleted succesfully");
 			test.setItems(loadData());
-			search_Trainor();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 			e.printStackTrace();
@@ -180,59 +177,31 @@ public class TrainorController implements Initializable{
     }
     
     @FXML
-    void search_Trainor() {          
-		col_Id.setCellValueFactory(new PropertyValueFactory<Trainor, String>("id"));
-		col_FirstName.setCellValueFactory(new PropertyValueFactory<Trainor, String>("firstName"));
-		col_LastName.setCellValueFactory(new PropertyValueFactory<Trainor, String>("lastName"));
-		col_Email.setCellValueFactory(new PropertyValueFactory<Trainor, String>("email"));
-		col_Phone.setCellValueFactory(new PropertyValueFactory<Trainor, String>("phoneNumber"));
-		col_Address.setCellValueFactory(new PropertyValueFactory<Trainor, String>("address"));
-		col_Payment.setCellValueFactory(new PropertyValueFactory<Trainor, String>("paymentInformation"));
-        dataList = loadData();
-        test.setItems(dataList);
-        FilteredList<Trainor> filteredData = new FilteredList<>(dataList, b -> true);  
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-        	filteredData.setPredicate(person -> {
-        		if (newValue == null || newValue.isEmpty()) {
-        			return true;
-        		}    
-    String lowerCaseFilter = newValue.toLowerCase();
+    void  Search(KeyEvent event) {
+    try {
+    	connection = handler.getConnection();
+    	String q1 = "SELECT * FROM employee where (employeeId like '$"+filterField.getText()+"%' or firstName like '%"+filterField.getText()+"%'  or lastName like '%"+filterField.getText()+ "%' or email like '%"+filterField.getText()+"%' or phoneNumber like '%"+filterField.getText()+"%'  or address like '%"+filterField.getText()+"%' or paymentInformation like '%"+filterField.getText()+"%') and role = 'trainor'  ";
+    	dataList=FXCollections.observableArrayList();
+    	pst= connection.prepareStatement(q1);
    
-    	if (person.getId() != -1) 
-    	{
-    		return true;
-    	}
-    	else if (person.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getLastName().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getEmail().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true;
-		}
-    	else if (person.getPhoneNumber().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getAddress().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-    	else if (person.getPaymentInformation().toLowerCase().indexOf(lowerCaseFilter) != -1 ) 
-		{
-			return true; 
-		} 
-        else  
-          return false; 
-        });
-        });  
-        SortedList<Trainor> sortedData = new SortedList<>(filteredData);  
-        sortedData.comparatorProperty().bind(test.comparatorProperty());  
-        test.setItems(sortedData);      
+    ResultSet rs = pst.executeQuery();
+    while(rs.next())
+    {
+    	dataList.add(new Trainor(rs.getInt("employeeId"),rs.getString("firstName"),rs.getString("LastName"),rs.getString("email")
+	    		,rs.getString("phoneNumber"),rs.getString("address"),rs.getString("paymentInformation")));
+    }
+    }catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+	col_Id.setCellValueFactory(new PropertyValueFactory<Trainor, String>("id"));
+	col_FirstName.setCellValueFactory(new PropertyValueFactory<Trainor, String>("firstName"));
+	col_LastName.setCellValueFactory(new PropertyValueFactory<Trainor, String>("lastName"));
+	col_Email.setCellValueFactory(new PropertyValueFactory<Trainor, String>("email"));
+	col_Phone.setCellValueFactory(new PropertyValueFactory<Trainor, String>("phoneNumber"));
+	col_Address.setCellValueFactory(new PropertyValueFactory<Trainor, String>("address"));
+	col_Payment.setCellValueFactory(new PropertyValueFactory<Trainor, String>("paymentInformation"));
+    test.setItems(dataList);
     }
     
     public void getHomeScene() {
@@ -325,7 +294,6 @@ public class TrainorController implements Initializable{
 		col_Address.setCellValueFactory(new PropertyValueFactory<Trainor, String>("address"));
 		col_Payment.setCellValueFactory(new PropertyValueFactory<Trainor, String>("paymentInformation"));
 		test.setItems(loadData());
-		search_Trainor();
 	}
 
 }
