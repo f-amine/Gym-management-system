@@ -29,19 +29,8 @@ public class Main extends Application {
 		}
 	}
 	
-	public static Stage getStg() {
-		return stg;
-	}
-
-	public static void setStg(Stage stg) {
-		Main.stg = stg;
-	}
 
 	public void changeSceen(String fxml) throws IOException{
-		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
-		stg.getScene().setRoot(pane);
-	}
-	public void changeMemberSceen(String fxml) throws IOException{
 		Parent pane = FXMLLoader.load(getClass().getResource(fxml));
 		stg.getScene().setRoot(pane);
 	}

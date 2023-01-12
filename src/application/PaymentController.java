@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -133,6 +134,43 @@ public class PaymentController implements Initializable {
 		return list;
     	
     	}
+    @FXML
+    void MemberDataSheet(MouseEvent event) {
+    	connection = handler.getConnection();
+    	String q1 = "Select firstname,lastname,email,phoneNumber,address,paymentInformation,emergencyContactInfo,membershipExpiration from member ";
+
+        try {
+    		pst=connection.prepareStatement(q1);
+    		ResultSet rs = pst.executeQuery();
+			FileWriter writer = new FileWriter("MemberData.csv");
+            // Create Header
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                sb.append(rs.getMetaData().getColumnName(i));
+                sb.append(",");
+            }
+            writer.append(sb.toString());
+            writer.append("\n");
+            // Fill Data
+            while (rs.next()) {
+                sb.setLength(0);
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    sb.append(rs.getString(i));
+                    sb.append(",");
+                }
+                writer.append(sb.toString());
+                writer.append("\n");
+            }
+            //Close file
+            writer.flush();
+            writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        
+    }
  /*   @FXML
    void MemberDataSheet(MouseEvent event) {
     	connection = handler.getConnection();
@@ -179,7 +217,7 @@ public class PaymentController implements Initializable {
 				e.printStackTrace();
 			}
 		} */
-    @FXML
+    /*@FXML
     void MemberDataSheet(MouseEvent event) throws IOException, RowsExceededException, WriteException {
     	connection = handler.getConnection();
     	String q1 = "Select firstname,lastname,email,phoneNumber,address,paymentInformation,emergencyContactInfo,membershipExpiration from member ";
@@ -210,7 +248,7 @@ public class PaymentController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    }
+    }*/
     
     @FXML
     void confirmPayment(MouseEvent event) {

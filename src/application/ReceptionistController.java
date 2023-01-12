@@ -301,7 +301,6 @@ public class ReceptionistController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-    
     public void getMembershipOfferScene() {
 		Main m = new Main();
 		try {
