@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2023 at 04:43 PM
+-- Generation Time: Jan 13, 2023 at 07:44 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -46,6 +46,7 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`employeeId`, `username`, `password`, `firstName`, `lastName`, `email`, `phoneNumber`, `address`, `role`, `paymentInformation`) VALUES
 (1, 'a', '0cc175b9c0f1b6a831c399e269772661', 'Amine', 'g', 'aminefrira@gmail.com', '0697992092', 'Iziki 1', 'trainor', 'RIB : 100052121515 BANK: CIH'),
+(2, 'receptionist', '0a9b3767c8b9b69cea129110e8daeda2', 'amine', 'frira', 'aminefri@gmail.com', '069792092', 'marrakech', 'receptionist', 'RIB : 1515C15165'),
 (3, 'trainor', '114f21df2ce1ede108dc5d2226edd56c', 'a', 'a', 'a', 'a', 'aa', 'trainor', 'a'),
 (4, 'trainor', '114f21df2ce1ede108dc5d2226edd56c', 'amine', 'frira', 'aminefriri', 'frifnna', 'fnirnmfr', 'trainor', 'fnrifnr'),
 (6, 'w', 'w', 'w', 'ww', 'w', 'w', 'w', 'trainor', 'w'),
@@ -97,11 +98,12 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`memberId`, `membershiptype`, `program`, `firstname`, `lastname`, `email`, `phoneNumber`, `address`, `paymentInformation`, `emergencyContactInfo`, `membershipExpiration`) VALUES
-(1, '1', 'test1', 'q', 'q', 'test', 'test', 'test', 'test', 'test', '2022-12-29'),
+(1, '1', 'TEST', 'q', 'q', 'test', 'test', 'test', 'test', 'test', '2022-12-29'),
 (2, '2', 'q', 'q', 'q', 'q', 'q', 'q', NULL, NULL, '2023-12-20'),
 (3, '3', 'q', 'q', 'q', 'q', 'q', 'q', NULL, NULL, '2022-11-27'),
 (4, '2', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', '2022-09-02'),
-(5, '1', '11', '1', 'test', '1', '11', '1', ' 11', '1', '2023-01-26');
+(5, '1', '11', '1', 'test', '1', '11', '1', ' 11', '1', '2023-01-26'),
+(6, 'q', 'q', 'qqqafdafaefa', 'q', 'q', 'q', 'q', 'q', 'q', '2023-01-25');
 
 -- --------------------------------------------------------
 
@@ -133,12 +135,22 @@ INSERT INTO `membershipoffer` (`membershipOfferId`, `name`, `duration`, `price`)
 
 CREATE TABLE `payment` (
   `paymentId` int(11) NOT NULL,
-  `member` int(11) NOT NULL,
+  `member` varchar(11) NOT NULL,
   `amount` decimal(10,2) NOT NULL,
   `date` date NOT NULL,
-  `paymentMethod` varchar(255) NOT NULL,
-  `paymentStatus` varchar(255) NOT NULL
+  `paymentMethod` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`paymentId`, `member`, `amount`, `date`, `paymentMethod`) VALUES
+(1, '2', '100.00', '2022-12-15', 'Credit Card'),
+(2, '1', '300.20', '2023-01-19', 'Cheque'),
+(3, 'q', '1000.00', '2023-01-13', 'Cash'),
+(5, 'q', '1000.00', '2022-11-15', 'Cheque'),
+(6, 'q', '1000.00', '2022-11-15', 'Cheque');
 
 -- --------------------------------------------------------
 
@@ -235,7 +247,7 @@ ALTER TABLE `membershipoffer`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `paymentId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `paymentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `program`

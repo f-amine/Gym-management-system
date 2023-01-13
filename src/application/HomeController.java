@@ -62,7 +62,11 @@ public class HomeController implements Initializable {
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	public void getRevenueGraphData() {
  
-    	String q1 = "SELECT MONTH(date) AS month, SUM(amount) AS total_amount FROM payment WHERE YEAR(date) = YEAR(CURDATE()) GROUP BY MONTH(date)";
+    	String q1 = "SELECT MONTH(date) as month, SUM(amount) as total_amount\r\n"
+    			+ "FROM payment\r\n"
+    			+ "WHERE date BETWEEN DATE_SUB(NOW(), INTERVAL 1 YEAR) AND NOW()\r\n"
+    			+ "GROUP BY MONTH(date)\r\n"
+    			+ "ORDER BY MONTH(date) ASC";
 		try {
 			Statement st=connection.createStatement();
 			ResultSet rs = st.executeQuery(q1);

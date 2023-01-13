@@ -142,7 +142,7 @@ public class PaymentController implements Initializable {
         try {
     		pst=connection.prepareStatement(q1);
     		ResultSet rs = pst.executeQuery();
-			FileWriter writer = new FileWriter("MemberData.csv");
+			FileWriter writer = new FileWriter("C:\\Users\\Smiloxham\\Desktop\\testGYM\\boba\\src\\Receipts\\MemberData.csv");
             // Create Header
             StringBuilder sb = new StringBuilder();
             for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
@@ -217,39 +217,6 @@ public class PaymentController implements Initializable {
 				e.printStackTrace();
 			}
 		} */
-    /*@FXML
-    void MemberDataSheet(MouseEvent event) throws IOException, RowsExceededException, WriteException {
-    	connection = handler.getConnection();
-    	String q1 = "Select firstname,lastname,email,phoneNumber,address,paymentInformation,emergencyContactInfo,membershipExpiration from member ";
-    	try {
-			pst=connection.prepareStatement(q1);
-			ResultSet rs = pst.executeQuery();
-            File file = new File("data.xlsx");
-            WritableWorkbook workbook = Workbook.createWorkbook(file);
-            WritableSheet sheet = workbook.createSheet("Sheet1", 0);
-            int columnCount = rs.getMetaData().getColumnCount();
-            for (int i = 0; i < columnCount; i++) {
-                String columnName = rs.getMetaData().getColumnName(i + 1);
-                Label label = new Label(i, 0, columnName);
-                sheet.addCell(label);
-            }
-         // Write the data to the sheet
-            int rowCount = 1;
-            while (rs.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    String value = rs.getString(i + 1);
-                    Label label = new Label(i, rowCount, value);
-                    sheet.addCell(label);
-                }
-                rowCount++;
-            }
-            workbook.write();
-            workbook.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-    }*/
-    
     @FXML
     void confirmPayment(MouseEvent event) {
     	connection = handler.getConnection();
